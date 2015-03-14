@@ -14,11 +14,11 @@
 package xinge
 
 import (
-	"github.com/mreiferson/httpclient"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"time"
+	"github.com/aiwuTech/httpclient"
 )
 
 var (
