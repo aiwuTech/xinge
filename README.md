@@ -15,7 +15,7 @@ Installation
 Update
 ------
 
-更新FileLogger使用"go get -u"命令
+更新腾讯信鸽go-sdk使用"go get -u"命令
 
     go get -u github.com/aiwuTech/xinge
 
@@ -39,4 +39,4 @@ FAQ
 License
 -------
 
-xinge基于 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
+腾讯信鸽go-sdk基于 [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).
