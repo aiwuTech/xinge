@@ -22,6 +22,7 @@ import (
 	"sort"
 	"strings"
 	"time"
+	"github.com/aiwuTech/httpclient"
 )
 
 type Request struct {
@@ -59,12 +60,12 @@ func (req *Request) Execute() (*Response, error) {
 func (req *Request) doRequestAndGetBody() ([]byte, error) {
 	urls := req.HttpUrl + "?" + req.queryString()
 
-	rsp, err := forwardHttp(req.HttpMethod, urls, nil)
+	rsp, err := httpclient.ForwardHttp(req.HttpMethod, urls, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	body := getForwardHttpBody(rsp.Body)
+	body := httpclient.GetForwardHttpBody(rsp.Body)
 	return body, nil
 }
 
