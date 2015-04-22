@@ -17,12 +17,12 @@ import (
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
+	"github.com/aiwuTech/httpclient"
 	"log"
 	"net/url"
 	"sort"
 	"strings"
 	"time"
-	"github.com/aiwuTech/httpclient"
 )
 
 type Request struct {
