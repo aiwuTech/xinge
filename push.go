@@ -91,16 +91,26 @@ func (req *ReqPush) Push() error {
 		if androidMsg, ok := req.Message.(*AndroidMessage); ok {
 			androidMessage, err := json.Marshal(androidMsg)
 			if err != nil {
-				return errors.New("<xinge> marshal message err:" + err.Error())
+				return errors.New("<xinge> marshal android message err:" + err.Error())
 			}
 
 			message = string(androidMessage)
 		} else {
-			return errors.New("<xinge> invalid message content.")
+			return errors.New("<xinge> invalid android message content.")
 		}
 
 	case Platform_ios:
+		// message
+		if iosMsg, ok := req.Message.(*IosMessage); ok {
+			iosMessage, err := json.Marshal(iosMsg)
+			if err != nil {
+				return errors.New("<xinge> marshal ios message err:" + err.Error())
+			}
 
+			message = string(iosMessage)
+		} else {
+			return errors.New("<xinge> invalid ios message content.")
+		}
 	}
 	request.SetParam("message", message)
 
