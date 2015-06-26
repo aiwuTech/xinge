@@ -75,6 +75,6 @@ type IosMessage struct {
 
 type ApsAttr struct {
 	Alert string `json:"alert"`
-	Badge string `json:"badge,omitempty"`
+	Badge int    `json:"badge,omitempty"`
 	Sound string `json:"sound,omitempty"`
 }
