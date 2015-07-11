@@ -15,7 +15,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/globalways/xinge"
+	"github.com/aiwuTech/xinge"
 	"time"
 )
 
