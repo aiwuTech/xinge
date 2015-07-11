@@ -32,7 +32,7 @@ func (cli *Client) AppTags(start, limit int) (int64, []string, error) {
 		return 0, tags, errors.New("<xinge> response err:" + response.Error())
 	}
 
-	result := response.Result
+	result := response.Result.(map[string]interface{})
 	total := int64(result["total"].(float64))
 	if total <= 0 {
 		return 0, tags, nil
@@ -108,7 +108,8 @@ func (cli *Client) TokenTags(token string) ([]string, error) {
 		return tags, errors.New("<xinge> response err:" + response.Error())
 	}
 
-	tagList := response.Result["tags"].([]interface{})
+	result := response.Result.(map[string]interface{})
+	tagList := result["tags"].([]interface{})
 	for _, tag := range tagList {
 		tags = append(tags, tag.(string))
 	}
@@ -129,5 +130,6 @@ func (cli *Client) TagTokensNum(tag string) (int64, error) {
 		return 0, errors.New("<xinge> response err:" + response.Error())
 	}
 
-	return int64(response.Result["device_num"].(float64)), nil
+	result := response.Result.(map[string]interface{})
+	return int64(result["device_num"].(float64)), nil
 }

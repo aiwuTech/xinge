@@ -52,5 +52,7 @@ func (cli *Client) AppDeviceNum() (int64, error) {
 		return 0, errors.New("<xinge> response err:" + response.Error())
 	}
 
-	return int64(response.Result["device_num"].(float64)), nil
+	result := response.Result.(map[string]interface{})
+
+	return int64(result["device_num"].(float64)), nil
 }
