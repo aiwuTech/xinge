@@ -67,3 +67,14 @@ type Package struct {
 	PackageDLUrl string `json:"packageDownloadUrl"` //拉起应用的下载链接（若客户端没有找到此应用会自动去下载）
 	Confirm      byte   `json:"confirm"`            //是否确认
 }
+
+type IosMessage struct {
+	Aps           *ApsAttr               `json:"aps"`
+	CustomContent map[string]interface{} `json:"custom_content,omitempty"` //参考android的自定义属性
+}
+
+type ApsAttr struct {
+	Alert string `json:"alert"`
+	Badge int    `json:"badge,omitempty"`
+	Sound string `json:"sound,omitempty"`
+}
