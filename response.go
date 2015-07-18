@@ -14,9 +14,9 @@
 package xinge
 
 type Response struct {
-	RetCode int                    `json:"ret_code"`
-	ErrMsg  string                 `json:"err_msg,omitempty"`
-	Result  map[string]interface{} `json:"result,omitempty"`
+	RetCode int         `json:"ret_code"`
+	ErrMsg  string      `json:"err_msg,omitempty"`
+	Result  interface{} `json:"result,omitempty"`
 }
 
 func (rsp *Response) OK() bool {

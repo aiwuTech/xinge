@@ -37,10 +37,6 @@ type ReqPush struct {
 	Cli          *Client
 }
 
-type Account struct {
-	Account string `json:"account"`
-}
-
 func (req *ReqPush) Push() error {
 	var request *Request
 
@@ -53,12 +49,8 @@ func (req *ReqPush) Push() error {
 		request.SetParam("account", req.UserAccounts[0])
 	case PushType_multi_account:
 		request = req.Cli.NewRequest("GET", multiAccountUrl)
-		accountList := make([]*Account, 0)
-		for _, account := range req.UserAccounts {
-			accountList = append(accountList, &Account{account})
-		}
 
-		accounts, err := json.Marshal(accountList)
+		accounts, err := json.Marshal(req.UserAccounts)
 		if err != nil {
 			return errors.New("<xinge> marshal account list err:" + err.Error())
 		}
@@ -91,16 +83,26 @@ func (req *ReqPush) Push() error {
 		if androidMsg, ok := req.Message.(*AndroidMessage); ok {
 			androidMessage, err := json.Marshal(androidMsg)
 			if err != nil {
-				return errors.New("<xinge> marshal message err:" + err.Error())
+				return errors.New("<xinge> marshal android message err:" + err.Error())
 			}
 
 			message = string(androidMessage)
 		} else {
-			return errors.New("<xinge> invalid message content.")
+			return errors.New("<xinge> invalid android message content.")
 		}
 
 	case Platform_ios:
+		// message
+		if iosMsg, ok := req.Message.(*IosMessage); ok {
+			iosMessage, err := json.Marshal(iosMsg)
+			if err != nil {
+				return errors.New("<xinge> marshal ios message err:" + err.Error())
+			}
 
+			message = string(iosMessage)
+		} else {
+			return errors.New("<xinge> invalid ios message content.")
+		}
 	}
 	request.SetParam("message", message)
 
